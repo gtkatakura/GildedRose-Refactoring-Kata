@@ -106,4 +106,56 @@ describe('Gilded Rose', () => {
       })
     })
   })
+
+  describe('when is Sulfuras, Hand of Ragnaros', () => {
+    describe('and sellIn is greater than 0', () => {
+      it('dont changes anything', () => {
+        const gildedRose = new Shop([
+          new Item('Sulfuras, Hand of Ragnaros', 0, 80),
+        ])
+
+        const items = gildedRose.updateQuality()
+
+        expect(items[0]).toEqual({
+          name: 'Sulfuras, Hand of Ragnaros',
+          sellIn: 0,
+          quality: 80,
+        })
+      })
+    })
+
+    describe('and sellIn is equal 0', () => {
+      describe('and quality is greater than 0', () => {
+        it('dont changes anything', () => {
+          const gildedRose = new Shop([
+            new Item('Sulfuras, Hand of Ragnaros', 0, 80),
+          ])
+
+          const items = gildedRose.updateQuality()
+
+          expect(items[0]).toEqual({
+            name: 'Sulfuras, Hand of Ragnaros',
+            sellIn: 0,
+            quality: 80,
+          })
+        })
+      })
+
+      describe('and quality is equal 0', () => {
+        it('dont changes anything', () => {
+          const gildedRose = new Shop([
+            new Item('Sulfuras, Hand of Ragnaros', 0, 80),
+          ])
+
+          const items = gildedRose.updateQuality()
+
+          expect(items[0]).toEqual({
+            name: 'Sulfuras, Hand of Ragnaros',
+            sellIn: 0,
+            quality: 80,
+          })
+        })
+      })
+    })
+  })
 })
