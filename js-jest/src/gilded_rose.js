@@ -15,17 +15,32 @@ class Shop {
     for (const item of this.items) {
       if (item.name === 'Sulfuras, Hand of Ragnaros') continue
 
-      const qualityFactor = item.sellIn > 0 ? 1 : 2
+      let qualityFactor = item.sellIn > 0 ? 1 : 2
 
-      item.sellIn -= 1
+      if (
+        item.name === 'Aged Brie' ||
+        item.name === 'Backstage passes to a TAFKAL80ETC concert'
+      ) {
+        if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
+          if (item.sellIn <= 0) {
+            qualityFactor = -item.quality
+          } else if (item.sellIn <= 5) {
+            qualityFactor = 3
+          } else if (item.sellIn <= 10) {
+            qualityFactor = 2
+          } else {
+            qualityFactor = 1
+          }
+        }
 
-      if (item.name === 'Aged Brie') {
         if (item.quality < 50) {
           item.quality += qualityFactor
         }
       } else if (item.quality > 0) {
         item.quality -= qualityFactor
       }
+
+      item.sellIn -= 1
 
       // if (this.items[i].name != 'Aged Brie' && this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
       //   if (this.items[i].quality > 0) {

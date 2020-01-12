@@ -1,7 +1,7 @@
 const { Shop, Item } = require('../src/gilded_rose')
 
 describe('Gilded Rose', () => {
-  describe.only('when is a normal item', () => {
+  describe('when is a normal item', () => {
     describe('and sellIn is greater than 0', () => {
       it('decrements quality and sellIn in 1', () => {
         const gildedRose = new Shop([new Item('+5 Dexterity Vest', 10, 20)])
@@ -47,7 +47,7 @@ describe('Gilded Rose', () => {
     })
   })
 
-  describe.only('when is Aged Brie', () => {
+  describe('when is Aged Brie', () => {
     describe('and sellIn is greater than 0', () => {
       it('decrements sellIn in 1 and increments quality in 2', () => {
         const gildedRose = new Shop([new Item('Aged Brie', 10, 20)])
@@ -107,7 +107,7 @@ describe('Gilded Rose', () => {
     })
   })
 
-  describe.only('when is Sulfuras, Hand of Ragnaros', () => {
+  describe('when is Sulfuras, Hand of Ragnaros', () => {
     describe('and sellIn is greater than 0', () => {
       it('dont changes anything', () => {
         const gildedRose = new Shop([
