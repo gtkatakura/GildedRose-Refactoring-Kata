@@ -37,6 +37,10 @@ class Shop {
           item.quality += qualityFactor
         }
       } else if (item.quality > 0) {
+        if (item.name.includes('Conjured')) {
+          qualityFactor *= 2
+        }
+
         item.quality -= qualityFactor
       }
 

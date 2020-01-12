@@ -45,6 +45,58 @@ describe('Gilded Rose', () => {
         })
       })
     })
+
+    describe('and is a Conjured item', () => {
+      describe('and sellIn is greater than 0', () => {
+        it('decrements quality in 2 and sellIn in 1', () => {
+          const gildedRose = new Shop([
+            new Item('+15 Conjured Dexterity Vest', 10, 20),
+          ])
+
+          const items = gildedRose.updateQuality()
+
+          expect(items[0]).toEqual({
+            name: '+15 Conjured Dexterity Vest',
+            sellIn: 9,
+            quality: 18,
+          })
+        })
+      })
+
+      describe('and sellIn is equal 0', () => {
+        describe('and quality is greater than 0', () => {
+          it('decrements quality in 4 and sellIn in 2', () => {
+            const gildedRose = new Shop([
+              new Item('+15 Conjured Dexterity Vest', 0, 20),
+            ])
+
+            const items = gildedRose.updateQuality()
+
+            expect(items[0]).toEqual({
+              name: '+15 Conjured Dexterity Vest',
+              sellIn: -1,
+              quality: 16,
+            })
+          })
+        })
+
+        describe('and quality is equal 0', () => {
+          it('decrements only sellIn in 1', () => {
+            const gildedRose = new Shop([
+              new Item('+15 Conjured Dexterity Vest', 0, 0),
+            ])
+
+            const items = gildedRose.updateQuality()
+
+            expect(items[0]).toEqual({
+              name: '+15 Conjured Dexterity Vest',
+              sellIn: -1,
+              quality: 0,
+            })
+          })
+        })
+      })
+    })
   })
 
   describe('when is Aged Brie', () => {
