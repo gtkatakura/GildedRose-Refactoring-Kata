@@ -46,4 +46,64 @@ describe('Gilded Rose', () => {
       })
     })
   })
+
+  describe('when is Aged Brie', () => {
+    describe('and sellIn is greater than 0', () => {
+      it('decrements sellIn in 1 and increments quality in 2', () => {
+        const gildedRose = new Shop([new Item('Aged Brie', 10, 20)])
+
+        const items = gildedRose.updateQuality()
+
+        expect(items[0]).toEqual({
+          name: 'Aged Brie',
+          sellIn: 9,
+          quality: 21,
+        })
+      })
+
+      describe('and quality is equal to 50', () => {
+        it('decrements only sellIn in 1', () => {
+          const gildedRose = new Shop([new Item('Aged Brie', 10, 50)])
+
+          const items = gildedRose.updateQuality()
+
+          expect(items[0]).toEqual({
+            name: 'Aged Brie',
+            sellIn: 9,
+            quality: 50,
+          })
+        })
+      })
+    })
+
+    describe('and sellIn is equal 0', () => {
+      describe('and quality is greater than 0', () => {
+        it('decrements sellIn in 1 and increments quality in 2', () => {
+          const gildedRose = new Shop([new Item('Aged Brie', 0, 20)])
+
+          const items = gildedRose.updateQuality()
+
+          expect(items[0]).toEqual({
+            name: 'Aged Brie',
+            sellIn: -1,
+            quality: 22,
+          })
+        })
+      })
+
+      describe('and quality is equal 0', () => {
+        it('decrements sellIn in 1 and increments quality in 2', () => {
+          const gildedRose = new Shop([new Item('Aged Brie', 0, 0)])
+
+          const items = gildedRose.updateQuality()
+
+          expect(items[0]).toEqual({
+            name: 'Aged Brie',
+            sellIn: -1,
+            quality: 2,
+          })
+        })
+      })
+    })
+  })
 })
