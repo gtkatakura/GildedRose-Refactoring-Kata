@@ -107,7 +107,7 @@ describe('Gilded Rose', () => {
     })
   })
 
-  describe('when is Sulfuras, Hand of Ragnaros', () => {
+  describe.only('when is Sulfuras, Hand of Ragnaros', () => {
     describe('and sellIn is greater than 0', () => {
       it('dont changes anything', () => {
         const gildedRose = new Shop([

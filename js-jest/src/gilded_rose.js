@@ -13,6 +13,8 @@ class Shop {
 
   updateQuality() {
     for (const item of this.items) {
+      if (item.name === 'Sulfuras, Hand of Ragnaros') continue
+
       const qualityFactor = item.sellIn > 0 ? 1 : 2
 
       item.sellIn -= 1
