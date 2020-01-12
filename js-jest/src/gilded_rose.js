@@ -23,7 +23,11 @@ class Item {
   updateQuality() {
     if (this.lendary) return
 
-    let qualityFactor = this.sellIn > 0 ? 1 : 2
+    let qualityFactor = 1
+
+    if (this.sellIn <= 0) {
+      qualityFactor *= 2
+    }
 
     if (this.name === 'Backstage passes to a TAFKAL80ETC concert') {
       if (this.sellIn <= 0) {
