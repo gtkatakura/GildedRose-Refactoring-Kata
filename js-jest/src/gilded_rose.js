@@ -1,8 +1,9 @@
 class Item {
-  constructor(name, sellIn, quality) {
+  constructor({ name, sellIn, quality, lendary = false }) {
     this.name = name
     this.sellIn = sellIn
     this.quality = quality
+    this.lendary = lendary
   }
 }
 
@@ -13,7 +14,7 @@ class Shop {
 
   updateQuality() {
     for (const item of this.items) {
-      if (item.name === 'Sulfuras, Hand of Ragnaros') continue
+      if (item.lendary) continue
 
       let qualityFactor = item.sellIn > 0 ? 1 : 2
 
