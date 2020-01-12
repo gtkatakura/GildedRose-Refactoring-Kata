@@ -158,4 +158,102 @@ describe('Gilded Rose', () => {
       })
     })
   })
+
+  describe('when is Backstage passes to a TAFKAL80ETC concert', () => {
+    describe('and sellIn is greater than 10', () => {
+      it('decrements sellIn in 1 and increments quality in 1', () => {
+        const gildedRose = new Shop([
+          new Item('Backstage passes to a TAFKAL80ETC concert', 11, 20),
+        ])
+
+        const items = gildedRose.updateQuality()
+
+        expect(items[0]).toEqual({
+          name: 'Backstage passes to a TAFKAL80ETC concert',
+          sellIn: 10,
+          quality: 21,
+        })
+      })
+    })
+
+    describe('and sellIn is equal to 10', () => {
+      it('decrements sellIn in 1 and increments quality in 2', () => {
+        const gildedRose = new Shop([
+          new Item('Backstage passes to a TAFKAL80ETC concert', 10, 20),
+        ])
+
+        const items = gildedRose.updateQuality()
+
+        expect(items[0]).toEqual({
+          name: 'Backstage passes to a TAFKAL80ETC concert',
+          sellIn: 9,
+          quality: 22,
+        })
+      })
+    })
+
+    describe('and sellIn is less than 10 and greather than 5', () => {
+      it('decrements sellIn in 1 and increments quality in 2', () => {
+        const gildedRose = new Shop([
+          new Item('Backstage passes to a TAFKAL80ETC concert', 9, 20),
+        ])
+
+        const items = gildedRose.updateQuality()
+
+        expect(items[0]).toEqual({
+          name: 'Backstage passes to a TAFKAL80ETC concert',
+          sellIn: 8,
+          quality: 22,
+        })
+      })
+    })
+
+    describe('and sellIn is equal to 5', () => {
+      it('decrements sellIn in 1 and increments quality in 3', () => {
+        const gildedRose = new Shop([
+          new Item('Backstage passes to a TAFKAL80ETC concert', 5, 20),
+        ])
+
+        const items = gildedRose.updateQuality()
+
+        expect(items[0]).toEqual({
+          name: 'Backstage passes to a TAFKAL80ETC concert',
+          sellIn: 4,
+          quality: 23,
+        })
+      })
+    })
+
+    describe('and sellIn is less than 5 and greather than 0', () => {
+      it('decrements sellIn in 1 and increments quality in 3', () => {
+        const gildedRose = new Shop([
+          new Item('Backstage passes to a TAFKAL80ETC concert', 4, 20),
+        ])
+
+        const items = gildedRose.updateQuality()
+
+        expect(items[0]).toEqual({
+          name: 'Backstage passes to a TAFKAL80ETC concert',
+          sellIn: 3,
+          quality: 23,
+        })
+      })
+    })
+
+    describe('and sellIn is equal to 0', () => {
+      it('decrements sellIn in 1 and updates quality to 0', () => {
+        const gildedRose = new Shop([
+          new Item('Backstage passes to a TAFKAL80ETC concert', 0, 20),
+        ])
+
+        const items = gildedRose.updateQuality()
+
+        expect(items[0]).toEqual({
+          name: 'Backstage passes to a TAFKAL80ETC concert',
+          sellIn: -1,
+          quality: 0,
+        })
+      })
+    })
+  })
 })
