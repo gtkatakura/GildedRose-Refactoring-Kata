@@ -1,3 +1,6 @@
+const MAX_QUALITY = 50
+const MIN_QUALITY = 0
+
 class Item {
   constructor({
     name,
@@ -22,29 +25,30 @@ class Item {
 
     let qualityFactor = this.sellIn > 0 ? 1 : 2
 
-    if (this.factores.quality.type === 'increment') {
-      if (this.name === 'Backstage passes to a TAFKAL80ETC concert') {
-        if (this.sellIn <= 0) {
-          qualityFactor = -this.quality
-        } else if (this.sellIn <= 5) {
-          qualityFactor = 3
-        } else if (this.sellIn <= 10) {
-          qualityFactor = 2
-        } else {
-          qualityFactor = 1
-        }
+    if (this.name === 'Backstage passes to a TAFKAL80ETC concert') {
+      if (this.sellIn <= 0) {
+        qualityFactor = -this.quality
+      } else if (this.sellIn <= 5) {
+        qualityFactor = 3
+      } else if (this.sellIn <= 10) {
+        qualityFactor = 2
+      } else {
+        qualityFactor = 1
       }
-
-      if (this.quality < 50) {
-        this.quality += qualityFactor
-      }
-    } else if (this.quality > 0) {
-      if (this.name.includes('Conjured')) {
-        qualityFactor *= 2
-      }
-
-      this.quality -= qualityFactor
     }
+
+    if (this.name.includes('Conjured')) {
+      qualityFactor *= 2
+    }
+
+    if (this.factores.quality.type === 'decrement') {
+      qualityFactor = -qualityFactor
+    }
+
+    this.quality = Math.max(
+      MIN_QUALITY,
+      Math.min(this.quality + qualityFactor, MAX_QUALITY)
+    )
 
     this.sellIn -= 1
   }
