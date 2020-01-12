@@ -47,7 +47,7 @@ describe('Gilded Rose', () => {
     })
   })
 
-  describe('when is Aged Brie', () => {
+  describe.only('when is Aged Brie', () => {
     describe('and sellIn is greater than 0', () => {
       it('decrements sellIn in 1 and increments quality in 2', () => {
         const gildedRose = new Shop([new Item('Aged Brie', 10, 20)])
