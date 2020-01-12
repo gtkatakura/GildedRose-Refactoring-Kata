@@ -1,9 +1,52 @@
 class Item {
-  constructor({ name, sellIn, quality, lendary = false }) {
+  constructor({
+    name,
+    sellIn,
+    quality,
+    lendary = false,
+    factores = {
+      quality: {
+        type: 'decrement',
+      },
+    },
+  }) {
     this.name = name
     this.sellIn = sellIn
     this.quality = quality
     this.lendary = lendary
+    this.factores = factores
+  }
+
+  updateQuality() {
+    if (this.lendary) return
+
+    let qualityFactor = this.sellIn > 0 ? 1 : 2
+
+    if (this.factores.quality.type === 'increment') {
+      if (this.name === 'Backstage passes to a TAFKAL80ETC concert') {
+        if (this.sellIn <= 0) {
+          qualityFactor = -this.quality
+        } else if (this.sellIn <= 5) {
+          qualityFactor = 3
+        } else if (this.sellIn <= 10) {
+          qualityFactor = 2
+        } else {
+          qualityFactor = 1
+        }
+      }
+
+      if (this.quality < 50) {
+        this.quality += qualityFactor
+      }
+    } else if (this.quality > 0) {
+      if (this.name.includes('Conjured')) {
+        qualityFactor *= 2
+      }
+
+      this.quality -= qualityFactor
+    }
+
+    this.sellIn -= 1
   }
 }
 
@@ -14,38 +57,7 @@ class Shop {
 
   updateQuality() {
     for (const item of this.items) {
-      if (item.lendary) continue
-
-      let qualityFactor = item.sellIn > 0 ? 1 : 2
-
-      if (
-        item.name === 'Aged Brie' ||
-        item.name === 'Backstage passes to a TAFKAL80ETC concert'
-      ) {
-        if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
-          if (item.sellIn <= 0) {
-            qualityFactor = -item.quality
-          } else if (item.sellIn <= 5) {
-            qualityFactor = 3
-          } else if (item.sellIn <= 10) {
-            qualityFactor = 2
-          } else {
-            qualityFactor = 1
-          }
-        }
-
-        if (item.quality < 50) {
-          item.quality += qualityFactor
-        }
-      } else if (item.quality > 0) {
-        if (item.name.includes('Conjured')) {
-          qualityFactor *= 2
-        }
-
-        item.quality -= qualityFactor
-      }
-
-      item.sellIn -= 1
+      item.updateQuality()
     }
 
     return this.items
