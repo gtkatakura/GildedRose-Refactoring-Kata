@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Gilded Rose kata in JavaScript with Jest",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test": "jest test/**.test.js",
+    "test:watch": "jest test/**.test.js --watch",
+    "test:coverage": "jest test/**.test.js --coverage"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,12 @@
   },
   "homepage": "https://github.com/emilybache/GildedRose-Refactoring-Kata",
   "devDependencies": {
+    "@stryker-mutator/core": "^2.5.0",
+    "@stryker-mutator/html-reporter": "^2.5.0",
+    "@stryker-mutator/javascript-mutator": "^2.5.0",
+    "@stryker-mutator/jest-runner": "^2.5.0",
     "jest": "^24.9.0",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "stryker-cli": "^1.0.0"
   }
 }
